@@ -25,18 +25,18 @@ function setup() {
     pages.push(new Item(
       i,
 
-      /*
+      
       // FOR LOADING IN GITHUB
       "/to-you/assets/photofront/item" + i + ".png",
       "/to-you/assets/photoback/item" + i + ".png",
       "/to-you/assets/letters/letter_" + i + ".jpg",
-      */
       
+      /*
       // FOR LOADING IN LOCAL
       "/assets/photofront/item" + i + ".png",
       "/assets/photoback/item" + i + ".png",
       "/assets/letters/letter_" + i + ".jpg",
-      
+      */
 
 
       b)
