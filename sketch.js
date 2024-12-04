@@ -1,18 +1,20 @@
-let pages = [];
-let images = [];
-let buffer = 100; // padding for generated images
+let pages = []; // holds all items 
+                // item: {id, front, back, letter, btn}
+let images = []; // holds actively displayed imgs
+let buffer = 100; // padding for generated imgs
 
-let inventoryCount = 44;
+let inventoryCount = 44; // total items
 let nowDisplaying = false;
+let currentPage = 0; 
 
 function preload() {
-  
-  
 }
 
 function setup() {
-  createCanvas(windowWidth-50, windowHeight -300);
+  createCanvas(windowWidth-50, windowHeight -350);
   //noCanvas(); 
+
+  // generate an item up to inventoryCount
   let element = select("#numHeader");
   for (let i = 1; i <= inventoryCount; i++) {
     let b = createButton(i.toString());
@@ -22,10 +24,12 @@ function setup() {
     pages.push(new Item(
       i,
 
+      /*
       // FOR LOADING IN GITHUB
       "/to-you/assets/photofront/item" + i + ".png",
       "/to-you/assets/photoback/item" + i + ".png",
       "/to-you/assets/letters/letter_" + i + ".jpg",
+      */
 
       // FOR LOADING IN LOCAL
       "/assets/photofront/item" + i + ".png",
@@ -43,7 +47,7 @@ function draw() {
   background(255);
 
   if (images.length > 2) {
-    let img; 
+    let img;
 
     blendMode(BLEND);
     tint(255, 255);
@@ -51,7 +55,7 @@ function draw() {
     img = images[0];
     image(img[0], // image source
       img[1], img[2], // image position
-      img[0].width/5, img[0].height/5);
+      img[0].width/img[3], img[0].height/img[3]);
 
     blendMode(BLEND);
     tint(255, 127);
@@ -59,8 +63,7 @@ function draw() {
     img = images[1];
     image(img[0], // image source
       img[1], img[2], // image position
-      img[0].width/5, img[0].height/5);
-    
+      img[0].width/img[3], img[0].height/img[3]);
 
     tint(255, 255);
     blendMode(MULTIPLY);
@@ -68,7 +71,7 @@ function draw() {
     img = images[2];
     image(img[0], // image source
       img[1], img[2], // image position
-      img[0].width/5, img[0].height/5);
+      img[0].width/img[3], img[0].height/img[3]);
     tint(255, 255);
     blendMode(BLEND);
   }
@@ -82,10 +85,40 @@ class Item {
     this.letter = l; 
     this.button = btn;
   }
+}
 
-  letter() {
-    return this.letter;
-  }
+function doubleClicked(){
+  let x = mouseX, y = mouseY; 
+
+  // OPEN LINK FOR FRONT IMG WHEN DOUBLE CLICKED
+  img = images[0];
+  if ((x <= img[1] + img[0].width/img[3]) &&
+      (x >= img[1]) &&
+      (y <= img[2] + img[0].height/img[3]) &&
+      (y >= img[2]))
+       {
+        window.open(pages[currentPage-1].front); 
+       }
+
+  // OPEN LINK FOR BACK IMG WHEN DOUBLE CLICKED
+  img = images[1];
+  if ((x <= img[1] + img[0].width/img[3]) &&
+      (x >= img[1]) &&
+      (y <= img[2] + img[0].height/img[3]) &&
+      (y >= img[2]))
+       {
+        window.open(pages[currentPage-1].back); 
+       }
+
+  // OPEN LINK FOR LETTER WHEN DOUBLE CLICKED
+  img = images[2];
+  if ((x <= img[1] + img[0].width/img[3]) &&
+      (x >= img[1]) &&
+      (y <= img[2] + img[0].height/img[3]) &&
+      (y >= img[2]))
+      {
+        window.open(pages[currentPage-1].letter); 
+      }
 }
 
 function loadImages(event) {
@@ -94,23 +127,26 @@ function loadImages(event) {
   //console.log(event.target);
   let element = event.target;
   //console.log(element.id); // returns id of button
-  let number = int(element.id.substring(7));
-  console.log(number);
-  //console.log(pages[number-1]);
-  let item = pages[number-1];
+  currentPage = int(element.id.substring(7));
+  console.log(currentPage);
+  //console.log(pages[currentPage-1]);
+  let item = pages[currentPage-1];
 
   // add images to render
   images.push([loadImage(item.front),
-    random(0, width - buffer), 
-    random(0, height - buffer)]
+    random(0 - buffer, width - buffer), 
+    random(0 - buffer, height - buffer),
+    randResizeVar()]
   );
   images.push([loadImage(item.back),
-    random(0, width - buffer), 
-    random(0, height - buffer)]
+    random(0 - buffer, width - buffer), 
+    random(0 - buffer, height - buffer),
+    randResizeVar()]
   );
   images.push([loadImage(item.letter),
-    random(0, width - buffer), 
-    random(0, height - buffer)]
+    random(0 - buffer, width - buffer), 
+    random(0 - buffer, height - buffer), 
+    randResizeVar()]
   );
 }
 
@@ -120,5 +156,9 @@ function releaseImages() {
 }
 
 function windowResized() {
-  resizeCanvas(windowWidth-50, windowHeight - 300);
+  resizeCanvas(windowWidth-50, windowHeight - 350);
+}
+
+function randResizeVar() {
+  return random(2, 5); 
 }

@@ -22,6 +22,7 @@ body {
 
 button {
   background-color: white;
+  font-family: "Helvetica";
   border: none;
   color: #eb5b13;
   cursor: pointer;
@@ -37,7 +38,7 @@ button {
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
-  padding-left: 60px;
+  padding-left: 50px;
   padding-right: 60px;
   padding-bottom: 30px;
   color: #eb5b13;
@@ -60,7 +61,7 @@ h2 {
 .footer {
   padding-top: 50px;
   padding-bottom: 20px;
-  padding-left: 60px;
-  padding-right: 60px;
+  padding-left: 50px;
+  padding-right: 50px;
   text-align: center;
 }
