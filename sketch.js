@@ -2,7 +2,7 @@ let pages = [];
 let images = [];
 let buffer = 100; // padding for generated images
 
-let inventoryCount = 12;
+let inventoryCount = 44;
 let nowDisplaying = false;
 
 function preload() {
