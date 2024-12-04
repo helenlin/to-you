@@ -6,12 +6,13 @@ let buffer = 100; // padding for generated imgs
 let inventoryCount = 44; // total items
 let nowDisplaying = false;
 let currentPage = 0; 
+let cnv;
 
 function preload() {
 }
 
 function setup() {
-  createCanvas(windowWidth-50, windowHeight -350);
+  cnv = createCanvas(windowWidth, windowHeight -350);
   //noCanvas(); 
 
   // generate an item up to inventoryCount
@@ -24,18 +25,18 @@ function setup() {
     pages.push(new Item(
       i,
 
-      
+      /*
       // FOR LOADING IN GITHUB
       "/to-you/assets/photofront/item" + i + ".png",
       "/to-you/assets/photoback/item" + i + ".png",
       "/to-you/assets/letters/letter_" + i + ".jpg",
+      */
       
-      /*
       // FOR LOADING IN LOCAL
       "/assets/photofront/item" + i + ".png",
       "/assets/photoback/item" + i + ".png",
       "/assets/letters/letter_" + i + ".jpg",
-      */
+      
 
 
       b)
@@ -48,7 +49,7 @@ function setup() {
 
 function draw() {
 
-  background(255);
+  background("#f7f7f7");
 
   if (images.length > 2) {
     let img;
@@ -160,9 +161,9 @@ function releaseImages() {
 }
 
 function windowResized() {
-  resizeCanvas(windowWidth-50, windowHeight - 350);
+  resizeCanvas(windowWidth, windowHeight - 350);
 }
 
 function randResizeVar() {
-  return random(2, 5); 
+  return random(1, 5); 
 }
