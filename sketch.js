@@ -7,6 +7,8 @@ let inventoryCount = 44; // total items
 let nowDisplaying = false;
 let currentPage = 0; 
 let cnv;
+let threeDCnv; // threeDCnv.stroke(); threeDCnv.image(); 
+let modalHolder; 
 
 function preload() {
 }
@@ -102,7 +104,19 @@ function doubleClicked(){
       (y <= img[2] + img[0].height/img[3]) &&
       (y >= img[2]))
        {
-        window.open(pages[currentPage-1].front); 
+        let elem = document.getElementById("modal1"); 
+        let openImage = document.createElement("img");
+        openImage.setAttribute("src", pages[currentPage-1].front);
+        openImage.setAttribute("height", img[0].height);
+        openImage.setAttribute("width", img[0].width);
+        openImage.setAttribute("alt", "Front of item " + currentPage);
+        
+        if (modalHolder != null) {
+          elem.removeChild(modalHolder);
+        }
+        elem.appendChild(openImage);
+        modalHolder = openImage;
+        loadModal(); 
        }
 
   // OPEN LINK FOR BACK IMG WHEN DOUBLE CLICKED
@@ -112,7 +126,19 @@ function doubleClicked(){
       (y <= img[2] + img[0].height/img[3]) &&
       (y >= img[2]))
        {
-        window.open(pages[currentPage-1].back); 
+        let elem = document.getElementById("modal1"); 
+        let openImage = document.createElement("img");
+        openImage.setAttribute("src", pages[currentPage-1].back);
+        openImage.setAttribute("height", img[0].height);
+        openImage.setAttribute("width", img[0].width);
+        openImage.setAttribute("alt", "Back of item " + currentPage);
+        
+        if (modalHolder != null) {
+          elem.removeChild(modalHolder);
+        }
+        elem.appendChild(openImage);
+        modalHolder = openImage;
+        loadModal(); 
        }
 
   // OPEN LINK FOR LETTER WHEN DOUBLE CLICKED
@@ -122,8 +148,26 @@ function doubleClicked(){
       (y <= img[2] + img[0].height/img[3]) &&
       (y >= img[2]))
       {
-        window.open(pages[currentPage-1].letter); 
+        let elem = document.getElementById("modal1"); 
+        let openImage = document.createElement("img");
+        openImage.setAttribute("src", pages[currentPage-1].letter);
+        openImage.setAttribute("height", img[0].height);
+        openImage.setAttribute("width", img[0].width);
+        openImage.setAttribute("alt", "Letter of item" + currentPage);
+        
+        if (modalHolder != null) {
+          elem.removeChild(modalHolder);
+        }
+        elem.appendChild(openImage);
+        modalHolder = openImage;
+        loadModal(); 
       }
+}
+
+function loadModal() {
+  let elem = document.getElementById("modal1"); 
+  var instance = M.Modal.getInstance(elem);
+  instance.open();
 }
 
 function loadImages(event) {

@@ -4,6 +4,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.1/p5.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.1/addons/p5.sound.min.js"></script>
     <script src="sketch.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="icon" href="favicon.png" type="image/x-icon"/>
     <meta charset="utf-8" />
@@ -25,7 +29,22 @@
   <p>“we touch things to assure ourselves of reality. we touch the objects of our love.
     we touch the things we form. our tactile experiences are elemental.” – anni albers</p>
 </div>
-    
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+    </div>
+  </div>
+          
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(elems);
+  });
+</script>
     
   </body>
 </html>
