@@ -18,11 +18,11 @@ canvas {
 body {
   font-family: "BPdots";
   margin: 0;
-  background-color:#f7f7f7;
+  background-color:#e3e2de;
 }
 
 button {
-  background-color: #f7f7f7;
+  background-color: #e3e2de;
   font-family: "BPdots";
   border: none;
   color: #eb5b13;
@@ -41,13 +41,13 @@ button {
   flex-wrap: wrap;
   padding-left: 65px;
   padding-right: 65px;
-  padding-bottom: 30px;
+  padding-bottom: 20px;
   color: #eb5b13;
 }
 
 #title {
   padding-left: 70px;
-  padding-top: 50px;
+  padding-top: 10px;
   padding-bottom: 0px;
   font-weight: normal; 
   font-size: 24px;

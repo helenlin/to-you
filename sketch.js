@@ -40,12 +40,14 @@ function setup() {
       "/to-you/assets/photofront/item" + i + ".png",
       "/to-you/assets/photoback/item" + i + ".png",
       "/to-you/assets/letters/letter_" + i + ".jpg",
+      "/to-you/assets/titem/titem" + i + ".png",
       
       /*
       // FOR LOADING IN LOCAL
       "/assets/photofront/item" + i + ".png",
       "/assets/photoback/item" + i + ".png",
       "/assets/letters/letter_" + i + ".jpg",
+      "/assets/titem/titem" + i + ".png",
       */
 
 
@@ -58,7 +60,7 @@ function setup() {
 
 function draw() {
 
-  background("#f7f7f7");
+  background("#e3e2de");
 
   if (images.length > 2) {
     let img;
@@ -88,15 +90,21 @@ function draw() {
       img[0].width/img[3], img[0].height/img[3]);
     tint(255, 255);
     blendMode(BLEND);
+
+    img = images[3];
+    image(img[0], // image source
+      img[1], img[2], // image position
+      img[0].width/img[3], img[0].height/img[3]);
   }
 }
 
 class Item {
-  constructor(i, f, b, l, btn) {
+  constructor(i, f, b, l, t, btn) {
     this.id = i;
     this.front = f; 
     this.back = b; 
     this.letter = l; 
+    this.titem = t; 
     this.button = btn;
   }
 }
@@ -170,6 +178,29 @@ function doubleClicked(){
         modalHolder = openImage;
         loadModal(); 
       }
+
+  img = images[3];
+  if ((x <= img[1] + img[0].width/img[3]) &&
+      (x >= img[1]) &&
+      (y <= img[2] + img[0].height/img[3]) &&
+      (y >= img[2]))
+      {
+        let elem = document.getElementById("modal1"); 
+        let openImage = document.createElement("img");
+        openImage.setAttribute("src", pages[currentPage-1].titem);
+        openImage.setAttribute("height", img[0].height);
+        openImage.setAttribute("width", img[0].width);
+        openImage.setAttribute("alt", "Transformed item" + currentPage);
+        
+        if (modalHolder != null) {
+          elem.removeChild(modalHolder);
+        }
+        elem.appendChild(openImage);
+        modalHolder = openImage;
+        loadModal(); 
+      }
+
+
 }
 
 function loadModal() {
@@ -206,6 +237,11 @@ function loadImages(event) {
     randResizeVar()]
   );
   images.push([loadImage(item.letter),
+    random(0 - buffer, width - buffer), 
+    random(0 - buffer, height - buffer), 
+    randResizeVar()]
+  );
+  images.push([loadImage(item.titem),
     random(0 - buffer, width - buffer), 
     random(0 - buffer, height - buffer), 
     randResizeVar()]
