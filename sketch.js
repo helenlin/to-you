@@ -10,6 +10,14 @@ let cnv;
 let threeDCnv; // threeDCnv.stroke(); threeDCnv.image(); 
 let modalHolder; 
 
+let quotes = [
+  '\“we touch things to assure ourselves of reality. we touch the objects of our love. we touch the things we form. our tactile experiences are elemental.\” – anni albers',
+  '\“Every day, we interact with machines that are hard, with devices driven by abstract electrical and computational processes. They are produced in faraway places by unknown people, then sent to our doorstep in excessive packaging\” - lisa stark',
+  '\"Memory itself is a kind of map, linked to textures, smells, songs, places, the act of remembering in and of itself a kind of haunting.\" - vanessa angélica aillarreal'
+  ];
+let currentQuote = 0;
+let quoteHolder; 
+
 function preload() {
 }
 
@@ -45,7 +53,6 @@ function setup() {
 
     );
   }
-
 
 }
 
@@ -94,6 +101,7 @@ class Item {
   }
 }
 
+// Event for every time image is double clicked
 function doubleClicked(){
   let x = mouseX, y = mouseY; 
 
@@ -170,7 +178,12 @@ function loadModal() {
   instance.open();
 }
 
+// Event for every time button is clicked
 function loadImages(event) {
+  // render quote
+  console.log(loadCurrentQuote());
+
+  // clear prev images
   releaseImages(); 
 
   //console.log(event.target);
@@ -210,4 +223,10 @@ function windowResized() {
 
 function randResizeVar() {
   return random(1, 5); 
+}
+
+function loadCurrentQuote() {
+  let q = quotes[currentQuote++];
+  if (currentQuote >= quotes.length) currentQuote = 0;
+  return q;
 }
