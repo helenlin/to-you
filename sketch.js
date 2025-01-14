@@ -89,8 +89,9 @@ function draw() {
       img[1], img[2], // image position
       img[0].width/img[3], img[0].height/img[3]);
     tint(255, 255);
-    blendMode(BLEND);
 
+    blendMode(BLEND);
+    tint(255, 30);
     img = images[3];
     image(img[0], // image source
       img[1], img[2], // image position
